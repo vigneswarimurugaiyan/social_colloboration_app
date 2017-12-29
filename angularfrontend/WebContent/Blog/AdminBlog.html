@@ -1,0 +1,17 @@
+<h2>ADMIN BLOG</h2>
+<div ng-controller="BlogController">
+<table width="100%">
+<tr bgcolor="red"> 
+    <td> Blog ID </td>
+	<td> Blog Name </td>
+	<td> Blog Content </td>
+    <td> Action </td>
+</tr>
+<tr bgcolor="cyan" ng-repeat="blog in blogdata">
+    <td>{{blog.blogId}}</td>
+	<td><a href="BlogPage">{{blog.blogName}}</a></td>
+	<td>{{blog.blogContent}}</td>	
+	<td colspan="2"><input value="Delete" type="submit" ng-click="deleteBlog(blog.blogId)"/>
+	<input value="Edit" type="submit"/></td>
+</tr>
+</table>
