@@ -61,33 +61,32 @@ public class Blogcontroller {
 		      }
 		    
 	}
-	@PostMapping(value="/updateBlog")
-	public  ResponseEntity<String> updateBlog(@RequestBody blog blog)
+	@PostMapping(value="/edit")
+	public  ResponseEntity<blog> updateBlog(@RequestBody blog b)
 	{
-		blog tempBlog=blogDAO.getblogbyid(blog.getBlogId());	
-		tempBlog.setBlogName(blog.getBlogName());
-		tempBlog.setBlogContent(blog.getBlogContent());
-		if(blogDAO.updateblog(tempBlog))
-		{
-			return new ResponseEntity<String>("Blog Update",HttpStatus.OK);
-			
-		}
-		else
-		{
-			return new ResponseEntity<String>("Error in Blog updation",HttpStatus.SERVICE_UNAVAILABLE);
-			
-		}
+		System.out.println("impl"+b.getBlogName());
+		System.out.println("impl  "+b.getBlogId());
+		
+		if(blogDAO.updateblog(b))
+		 {
+		    System.out.println(b);
+		    
+	        return new ResponseEntity<blog>(b,HttpStatus.OK);
+	      }
+		 else
+	      {
+		   return new ResponseEntity<blog>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
+	      }
 	}
-	@PostMapping(value = "deleteBlog")
-	public ResponseEntity<String> deleteBlog(@RequestBody blog blog)
+	@PostMapping(value = "delete")
+	public ResponseEntity<blog> deleteBlog(@RequestBody blog b)
 	{
-		blog tempblog=blogDAO.getblogbyid(blog.getBlogId());
-		if(blogDAO.deleteblog(tempblog))
+		if(blogDAO.deleteblog(b))
 		{
-			return new ResponseEntity<String>("Blog Deleted",HttpStatus.OK);
+			return new ResponseEntity<blog>(b,HttpStatus.OK);
 		}
 		else{
-			return new ResponseEntity<String>("Error in blog deletion",HttpStatus.SERVICE_UNAVAILABLE);
+			return new ResponseEntity<blog>(b,HttpStatus.SERVICE_UNAVAILABLE);
 		}
 	}
 
