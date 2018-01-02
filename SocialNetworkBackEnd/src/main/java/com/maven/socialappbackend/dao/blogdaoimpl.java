@@ -118,4 +118,5 @@ public boolean rejectblog(blog b) {
 	}
 }
 
+
 }
