@@ -16,18 +16,18 @@ public class usercontroller {
 @Autowired
 userdao userDAO;
 @PostMapping(value="/insertuser")
-public ResponseEntity<?> saveuser(@RequestBody userdetail b)
+public ResponseEntity<userdetail> saveuser(@RequestBody userdetail b)
 {
 	b.setRole("user");
 	b.setIsOnline("N");
 	b.setStatus("N");
 if(userDAO.adduser(b))
 {
-return new ResponseEntity<String>("user registered",HttpStatus.OK);
+return new ResponseEntity<userdetail>(b,HttpStatus.OK);
 }
 else
 {
-	return new ResponseEntity<String>(" error user occured in user registration",HttpStatus.INTERNAL_SERVER_ERROR);	
+	return new ResponseEntity<userdetail>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
 }
 }
 @PostMapping(value="/loginuser")
@@ -48,17 +48,17 @@ else
 }
 }
 @GetMapping(value="/logoutuser/{username}")
-public ResponseEntity<String>login(@PathVariable("username") String username)
+public ResponseEntity<userdetail>login(@PathVariable("username") String username)
 {
 	userdetail u=userDAO.getuser(username);
 	u.setStatus("N");
 if(userDAO.changeonlinestatus(u))
 {
-return new ResponseEntity<String>("logged out successfully",HttpStatus.OK);
+return new ResponseEntity<userdetail>(u,HttpStatus.OK);
 }
 else
 {
-	return new ResponseEntity<String>("error occured in logout process",HttpStatus.INTERNAL_SERVER_ERROR);	
+	return new ResponseEntity<userdetail>(u,HttpStatus.INTERNAL_SERVER_ERROR);	
 }
 }
 
