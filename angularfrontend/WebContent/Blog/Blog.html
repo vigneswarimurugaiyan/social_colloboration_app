@@ -1,33 +1,54 @@
+<html>
+<head>
+<style>
+td.tdset
+{
+background-color:#f2dede;
+    font-weight: bold;
+}
+}
+</style>
+</head>
+<body "style=background-color:#9bd483;">
 <center>Blog Page</center>
 
 <div ng-controller="blogcontroller">
 
 <form id="blogform" method="post">
-<table align="center" width="80%" border="1">
+<center><table class="table: "style=width:90px;">
 	<tr>
-		<td>Blog Name</td>
-		<td><input type="text" name="blogName" ng-model="blog.blogName"/></td>
+		<td class="tdset">Blog Name</td>
+		<td class="tdset"><input type="text" name="blogName" ng-model="blog.blogName"/></td>
 	</tr>
 	<tr>
-		<td>Blog Content</td>
-		<td><textarea cols="30" row="10" name="blogContent" ng-model="blog.blogContent"></textarea></td>
+		<td class="tdset">Blog Content</td>
+		<td class="tdset"><textarea name="blogContent" ng-model="blog.blogContent"></textarea></td>
 	</tr>
-	<tr>
-		<td colspan="2"><center><input type="submit" value="Add Blog" ng-click="addBlog()"/></center></td>
-	</tr>
-</table>
+	
+</table></center>
+
+<div><center><input type="submit" value="Add Blog" ng-click="addblog()"/></center></div><br><br>
 </form>
-<table width="100%">
-	<tr bgcolor="blue"> 
-		<td> Blog Name </td>
-		<td> Blog Content </td>
-	</tr>
-	<tr bgcolor="cyan" ng-repeat="blog in blogdata">
-		<td><a href="BlogPage">{{blog.blogName}}</a></td>
-		<td>{{blog.blogContent}}</td>	
-	</tr>
+<table class="table table-hover">
+  <thead>
+    <tr>
+     
+      <th scope="col">Blog Name</th>
+      <th scope="col">Blog Content</th>
+      <th scope="col">Likes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="blog in blogdata">
+      <td class="tdset">{{blog.blogName}}</td>
+      <td class="tdset">{{blog.blogContent}}</td>
+       <td class="tdset">{{blog.likes}}</td>
+       <td class="tdset"><input type="button" value="Like" ng-click="like(blog.blogId)"/></td>
+       <td class="tdset"><input type="button" value="Edit" ng-click="edit(blog.blogId)"/></td>
+       <td class="tdset"><input type="button" value="Delete" ng-click="delete(blog.blogId)"/></td> 
+    </tr>
+  </tbody>
 </table>
-
-
-
 </div>
+</body>
+</html>

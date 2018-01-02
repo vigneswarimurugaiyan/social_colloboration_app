@@ -12,7 +12,7 @@
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
- <script src="../js/app111.js"></script>
+ <script src="js/app111.js"></script>
  </head>
 <body ng-app="myApp" ng-controller="indexcontroller">
 	<nav class="navbar navbar-inverse">
@@ -27,12 +27,13 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="#!"><i class="fa fa-home"></i>Home</a></li>
+				<li><a href="#!home"><i class="fa fa-home"></i>Home</a></li>
+				 <li><a href="#!registration"><i class="fa fa-shield"></i> Registartion</a></li>
+				  <li><a href="#!login"><i class="fa fa-shield"></i>Login</a></li>
         <li><a href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li>	
         <li><a href="#!Forum"><i class="fa fa-home"></i>Forum</a></li>
 				 <li><a href="#!Job"><i class="fa fa-shield"></i>Job</a></li>
          <li><a href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li>
-zzzzzzzz{{currentuser}}
  <li><div ng-show="currentuser.role=='admin'"><a href="#/joboperation">Joboperation</a></div></li>
         <li><div ng-show="currentuser.role=='admin'"><a href="#/blogoperation">Blogoperation</a></div></li>
       </ul>
@@ -46,7 +47,7 @@ zzzzzzzz{{currentuser}}
 	</div>
 	</nav>
 
-<div>zzzzzzzz{{currentuser}}</div>  
+  
     <!-- angular templating -->
 		<!-- this is where content will be injected -->
     <div ng-view></div>

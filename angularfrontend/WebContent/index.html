@@ -1,62 +1,56 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-<head>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8">
+    <title>welcome to dsinz Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet prefetch" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900">
+    <link rel="stylesheet prefetch" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/login.css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="javascripts/login.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
  <script src="js/app111.js"></script>
- </head>
-<body ng-app="myApp" ng-controller="indexcontroller">
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#!home">coloboration app</a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li><a href="#!home"><i class="fa fa-home"></i>Home</a></li>
-				 <li><a href="#!registration"><i class="fa fa-shield"></i> Registartion</a></li>
-				  <li><a href="#!login"><i class="fa fa-shield"></i>Login</a></li>
-        <li><a href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li>	
-        <li><a href="#!Forum"><i class="fa fa-home"></i>Forum</a></li>
-				 <li><a href="#!Job"><i class="fa fa-shield"></i>Job</a></li>
-         <li><a href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li>
- <li><div ng-show="currentuser.role=='admin'"><a href="#/joboperation">Joboperation</a></div></li>
-        <li><div ng-show="currentuser.role=='admin'"><a href="#/blogoperation">Blogoperation</a></div></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><form><input type="submit" value="logout" ng-click="logout()"/>Logout</form></li>
-      </ul>
-    </div>
-							</ul>
-
-					</div>
-	</div>
-	</nav>
-
-  
-    <!-- angular templating -->
-		<!-- this is where content will be injected -->
-    <div ng-view></div>
     
+  </head>
+  <body>
+   
 
- 
-</body>
+<div class="container">
+  <div class="info"></div>
+</div>
+<div class="form-block">
+  <div class="login_header">Social Media</div>
+  <div class="register-form dsinz-form">
+    <div ng-controller="usercontroller">
+    <form name="registerform">
+      <input type="text" placeholder="Name" name="username" ng-model="userdetail.userName" required="required"/><span ng-show="registerform.username.$invalid" style="color:red"> Name required</span>
+      <input type="password" placeholder="Password" name="password" ng-model="userdetail.password" required="required"/>
+      <input type="text" ng-model="email" placeholder="Email Address" name="email" ng-model="userdetail.emailId" required="required"/>
+      <button class="dsinz-login" ng-click="insertuser()" >create</button>
+      <p class="message">Already registered?<a href="#" style="padding-left:4px">Sign In</a></p>
+    </form>
+    </div>
+  </div>
+  <div class="login-form dsinz-form">
+    <div ng-controller="logincontroller">
+    <form name="loginform">
+      <input type="text" name="username" placeholder="User Name" ng-model="userdetail.userName" required="required"/><span ng-show="loginform.username.$dirty &amp;&amp; loginform.username.$invalid" style="color:red;text-align:left;display:block">Name required</span>
+      <input type="password" name="password" placeholder="Password" ng-model="userdetail.password" required="required"/><span ng-show="loginform.password.$dirty &amp;&amp; loginform.password.$invalid" style="color:red;text-align:left;display:block">Password required</span>
+      <button class="dsinz-login" ng-click="login()" value="login">Login</button>
+      <p class="message">Not registered?<a href="#" style="padding-left:4px">Create an accountt</a></p>
+    </form>
+    </div>
+  </div>
+</div>
+
+  </body>
 </html>
-
-
-
-
