@@ -72,6 +72,7 @@ myapp.controller("blogcontroller",function($scope,$http)
 			
 			$scope.addblog=function()
 			{
+				
 				console.log('Entered into InsertBlog');
 				$http.post('http://localhost:9089/middlewarerest/addblog',$scope.blog)
 				.then(function(response)
@@ -93,13 +94,31 @@ myapp.controller("blogcontroller",function($scope,$http)
 				});
 	
 			}
-			$scope.edit=function(blogId)
+			$scope.selectblog=function(blog)
 			{
-				$http.get('http://localhost:9089/middlewarerest/edit/'+blogId).then(getallblogs(),function(response){
-				console.log('blog like ');
-				
-				});
+				console.log("retrived selected blog",blog);
+				$scope.clickblog=blog;
+				}
 	
+			$scope.updateblog=function()
+			{
+				console.log('Entered into update blog');
+				$http.post('http://localhost:9089/middlewarerest/edit',$scope.clickblog)
+				.then(getallblogs(),function(response){
+
+						
+						console.log('Successful Blog updated');
+						});
+			}
+			$scope.deleteblog=function()
+			{
+				console.log('Entered into delete blog');
+				$http.post('http://localhost:9089/middlewarerest/delete',$scope.clickblog)
+				.then(getallblogs(),function(response){
+
+						
+						console.log('Successful Blog deleted');
+						});
 			}
 			function getallblogs()
 			{

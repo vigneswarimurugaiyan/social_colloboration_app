@@ -1,4 +1,4 @@
-<html>
+<!--  <html>
 <head>
 <style>
 td.tdset
@@ -8,8 +8,9 @@ background-color:#f2dede;
 }
 }
 </style>
-</head>
-<body "style=background-color:#9bd483;">
+</head>-->
+
+<!--  <body "style=background-color:#9bd483;">
 <center>Blog Page</center>
 
 <div ng-controller="blogcontroller">
@@ -51,4 +52,142 @@ background-color:#f2dede;
 </table>
 </div>
 </body>
-</html>
+</html>-->
+<div class="container" ng-controller="blogcontroller"> 
+    <hr>
+    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Add</button>
+     <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Blog</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Blog Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="blog.blogName">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Blog Content</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="blog.blogContent">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="addblog()" data-dismiss="modal">save</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+       </div>
+    </div>
+  
+  
+    <h2>Blog</h2>
+    <span class="clearfix"></span>
+    <hr>
+      <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>BlogName</th>
+        <th>BlogContent</th>
+        <th>Likes</th>
+        <th></th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="blog in blogdata">
+        <td>{{$index+1}}</td>
+        <td>{{blog.blogName}}</td>
+         <td>{{blog.blogContent}}</td>
+         <td>{{blog.likes}}</td>
+          <td><button type="button" class="btn btn-default btn-sm" ng-click="like(blog.blogId)">
+          <span class="glyphicon glyphicon-thumbs-up"></span>Like
+        </button></td>
+        <td>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModaledit" ng-click="selectblog(blog)">Edit</button>
+     </td>
+     <td>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModaldelete" ng-click="selectblog(blog)">Delete</button>
+     </td>
+      </tr>
+      
+    </tbody>
+  </table>  
+    
+   
+  <div class="modal fade" id="myModaledit" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Blog</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Blog Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="clickblog.blogName">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Blog Content</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="clickblog.blogContent">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="updateblog()" data-dismiss="modal">save</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+       </div>
+    </div>
+    
+  
+  <div class="modal fade" id="myModaldelete" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+        <strong style="color:red;">
+        you are going to delete <h4 style="color:black">BLOG NAME-{{clickblog.blogName}}</h4></strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteblog()">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+       </div>
+    </div>
+</div>
+</div>
