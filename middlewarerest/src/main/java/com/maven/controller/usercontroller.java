@@ -36,10 +36,11 @@ public ResponseEntity<userdetail>login(@RequestBody userdetail b,HttpSession ses
 	
 if(userDAO.checklogin(b))
 {
-	b.setStatus("y");
-	userDAO.changeonlinestatus(b);
 	userdetail tempuser=userDAO.getuser(b.getUserName());
-	session.setAttribute("currentuser",b.getUserName());
+	tempuser.setStatus("y");
+	userDAO.changeonlinestatus(tempuser);
+	System.out.println("role****"+tempuser.getRole());
+	session.setAttribute("currentuser",tempuser.getUserName());
 return new ResponseEntity<userdetail>(tempuser,HttpStatus.OK);
 }
 else

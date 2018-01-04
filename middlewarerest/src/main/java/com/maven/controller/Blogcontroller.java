@@ -1,6 +1,7 @@
 package com.maven.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,15 @@ public class Blogcontroller {
 	   return new ResponseEntity<blog>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
       }
     }
-	@GetMapping(value="/getAllBlogs")
-	public ResponseEntity<ArrayList<blog>> getAllBlogs()
+	
+	@GetMapping(value="/getAllBlogs/{userId}")
+	public ResponseEntity<ArrayList<blog>> getAllBlogs(@PathVariable("userId") int userId)
 	{
-		ArrayList listBlogs = (ArrayList) blogDAO.getallblogs();
+		System.out.println("obj**"+blogDAO);
+		ArrayList listBlogs = (ArrayList) blogDAO.getallblogs1(userId);
 	    //for(blog b:listBlogs)
 	   // {
-	    	System.out.println("check list"+listBlogs);
+	    	System.out.println("check list %%%%%%%%%%%%%%%%%%%"+listBlogs);
 	    //}
 		return new ResponseEntity<ArrayList<blog>>(listBlogs,HttpStatus.OK);
 	}
@@ -61,6 +64,41 @@ public class Blogcontroller {
 		      }
 		    
 	}
+		@GetMapping(value="/acceptblog/{blogid}")
+		public ResponseEntity<blog> acceptBlog(@PathVariable("blogid") int blogid)
+		{
+			blog b=blogDAO.getblogbyid(blogid);
+			b.setStatus("A");
+			if(blogDAO.approveblog(b))
+			 {
+			    System.out.println(b);
+			    
+		        return new ResponseEntity<blog>(b,HttpStatus.OK);
+		      }
+			 else
+		      {
+			   return new ResponseEntity<blog>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
+		      }
+		    
+	}
+		@GetMapping(value="/rejectblog/{blogid}")
+		public ResponseEntity<blog> rejectBlog(@PathVariable("blogid") int blogid)
+		{
+			blog b=blogDAO.getblogbyid(blogid);
+			b.setStatus("NA");
+			if(blogDAO.rejectblog(b))
+			 {
+			    System.out.println(b);
+			    
+		        return new ResponseEntity<blog>(b,HttpStatus.OK);
+		      }
+			 else
+		      {
+			   return new ResponseEntity<blog>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
+		      }
+		    
+	}
+		
 	@PostMapping(value="/edit")
 	public  ResponseEntity<blog> updateBlog(@RequestBody blog b)
 	{
