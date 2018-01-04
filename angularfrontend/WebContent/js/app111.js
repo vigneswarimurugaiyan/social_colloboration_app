@@ -85,6 +85,7 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 	
 			$scope.blog={blogId:"",blogName:"",blogContent:"",createDate:"",likes:0,user:"",status:"NA"};
 			var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+			$scope.currentuser=cuser;
 			$scope.addblog=function()
 			{
 				$scope.blog.user=cuser;
