@@ -3,19 +3,24 @@ myapp.controller('indexcontroller', function($scope,$rootScope,$cookieStore,$htt
 		{
 	
 console.log("hello from Controller");
-console.log($rootScope);
-console.log($scope);
-var ddd=$cookieStore.get('userdetail');
+var ddd= JSON.parse($window.localStorage.getItem('userdetail'));
+//console.log(ddd.role);
+//console.log(ddd.status);
+
 $scope.currentuser=ddd;
 $scope.logout=function(){
-	
+
 	console.log("inside logout"+$scope.currentuser.userName);
 			$http.get('http://localhost:9089/middlewarerest/logoutuser/'+$scope.currentuser.userName).then(function(response)
 					{
+				    var key = "userdetail";
 					console.log('Successfully loggedout');
-					 $cookieStore.remove('userdetail');
-					 var cook=$cookieStore.get('userdetail');
-					 $scope.currentuser=cook;
+					console.log("ddddddddd",JSON.parse($window.localStorage.getItem(key)));
+					$window.localStorage.removeItem(key)
+					console.log("ddddddddd",JSON.parse($window.localStorage.getItem(key)));
+					 //$cookieStore.remove('userdetail');
+					 //var cook=$cookieStore.get('userdetail');
+					 //$scope.currentuser=cook;
 					$window.location.href='/angularfrontend/';
 					});
 		}
@@ -41,7 +46,7 @@ myapp.controller('usercontroller', function($scope,$http) {
 		
 		
 });
-myapp.controller('logincontroller',function($scope,$http,$cookieStore,$window,$rootScope)
+myapp.controller('logincontroller',function($scope,$http,$window,$rootScope)
 		{
 	$scope.userdetail={userName:"",password:""};
 	$scope.login=function()
@@ -53,11 +58,19 @@ myapp.controller('logincontroller',function($scope,$http,$cookieStore,$window,$r
 			    
 			console.log("this is my response",response.data);
 			     $scope.userdetail=response.data;
-			    $cookieStore.put("userdetail",$scope.userdetail);
+			    $window.localStorage.setItem("userdetail",JSON.stringify($scope.userdetail));
+			    var currentuser = JSON.parse($window.localStorage.getItem("userdetail"));
+			    console.log("ffffffffff",currentuser.role);
+			    console.log("ffffffffffff",currentuser.status);
+
+			    
+			    
+			    
+			    //$cookieStore.put("userdetail",$scope.userdetail);
 			    //$cookies.remove('userdetail');
-			    console.log("value",$cookieStore.get('userdetail'));
-			    $rootScope.currentuser=$cookieStore.get('userdetail');
-			    console.log("inside login"+$rootScope.currentuser.userName);
+			    //onsole.log("value",$cookieStore.get('userdetail'));
+			    //$rootScope.currentuser=$cookieStore.get('userdetail');
+			    //console.log("inside login"+$rootScope.currentuser.userName);
 				console.log('Successfully loggedin');
 				$window.location.href='/angularfrontend/pages/home.html';
 				});
@@ -66,13 +79,15 @@ myapp.controller('logincontroller',function($scope,$http,$cookieStore,$window,$r
 
 
 
-myapp.controller("blogcontroller",function($scope,$http)
+myapp.controller("blogcontroller",function($scope,$http,$window)
 		{
-			$scope.blog={blogId:"",blogName:"",blogContent:"",createDate:"",likes:0,userId:"",status:"NA"};
-			
+	
+	
+			$scope.blog={blogId:"",blogName:"",blogContent:"",createDate:"",likes:0,user:"",status:"NA"};
+			var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
 			$scope.addblog=function()
 			{
-				
+				$scope.blog.user=cuser;
 				console.log('Entered into InsertBlog');
 				$http.post('http://localhost:9089/middlewarerest/addblog',$scope.blog)
 				.then(function(response)
@@ -80,7 +95,8 @@ myapp.controller("blogcontroller",function($scope,$http)
 						console.log('Successful Blog Entered');
 						});
 			}
-			$http.get("http://localhost:9089/middlewarerest/getAllBlogs")
+			
+			$http.get('http://localhost:9089/middlewarerest/getAllBlogs/'+cuser.userId)
 			.then(function(response)
 			{
 			$scope.blogdata=response.data;
@@ -122,7 +138,8 @@ myapp.controller("blogcontroller",function($scope,$http)
 			}
 			function getallblogs()
 			{
-				$http.get("http://localhost:9089/middlewarerest/getAllBlogs")
+				
+				$http.get('http://localhost:9089/middlewarerest/getAllBlogs/'+cuser.userId)
 				.then(function(response)
 				{
 				$scope.blogdata=response.data;
@@ -132,6 +149,20 @@ myapp.controller("blogcontroller",function($scope,$http)
 			$scope.unlike=function(blog)
 			{
 			blog.likes--;	
+			}
+			$scope.acceptblog=function(blogId)
+			{
+				$http.get('http://localhost:9089/middlewarerest/acceptblog/'+blogId).then(getallblogs(),function(response){
+					console.log('blog accepted');
+					
+					});
+			}
+			$scope.rejectblog=function(blogId)
+			{
+				$http.get('http://localhost:9089/middlewarerest/rejectblog/'+blogId).then(getallblogs(),function(response){
+					console.log('blog rejected');
+					
+					});
 			}
 
 		});

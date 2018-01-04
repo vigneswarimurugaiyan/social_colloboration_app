@@ -27,13 +27,12 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="#!"><i class="fa fa-home"></i>Home</a></li>
-        <li><a href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li>	
-        <li><a href="#!Forum"><i class="fa fa-home"></i>Forum</a></li>
-				 <li><a href="#!Job"><i class="fa fa-shield"></i>Job</a></li>
-         <li><a href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li>
-zzzzzzzz{{currentuser}}
- <li><div ng-show="currentuser.role=='admin'"><a href="#/joboperation">Joboperation</a></div></li>
-        <li><div ng-show="currentuser.role=='admin'"><a href="#/blogoperation">Blogoperation</a></div></li>
+        <li><div ng-show="currentuser.role=='user'"><a href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li>	
+        <li><div ng-show="currentuser.role=='user'"><a href="#!Forum"><i class="fa fa-home"></i>Forum</a></li>
+				 <li><div ng-show="currentuser.role=='user'"><a href="#!Job"><i class="fa fa-shield"></i>Job</a></li>
+         <li><div ng-show="currentuser.role=='admin'"><a href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li>
+ <li><div ng-show="currentuser.role=='admin'"><a href="#/joboperation"><i class="fa fa-shield">AdminJob</a></div></li>
+       
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><form><input type="submit" value="logout" ng-click="logout()"/>Logout</form></li>
