@@ -9,7 +9,7 @@ public interface blogdao {
 	public boolean updateblog(blog b);
 	public boolean deleteblog(blog b);
 	public blog getblogbyid(int blogId);
-	public List<blog> getallblogs();
+	public List<blog> getallblogs1(int userId);
 public boolean approveblog(blog b);
 public boolean rejectblog(blog b);
 }

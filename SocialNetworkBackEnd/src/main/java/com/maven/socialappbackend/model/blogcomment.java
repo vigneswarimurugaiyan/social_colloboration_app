@@ -17,7 +17,7 @@ public class blogcomment {
 	private int blogId;
 	private String blogComment;
 	private Date blogCommentdate;
-	private int userId;
+private int userId;
 	private String userName;
 	public int getBlogCommentid() {
 		return blogCommentid;

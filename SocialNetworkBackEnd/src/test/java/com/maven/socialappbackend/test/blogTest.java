@@ -19,6 +19,7 @@ import org.junit.Test;
 public class blogTest {
 
 static blogdao blogdao1;
+static userdao userdao1;
 	
 	@BeforeClass
 	public static void initialize()
@@ -28,18 +29,22 @@ static blogdao blogdao1;
 		context.refresh();
 		
 		blogdao1=(blogdao)context.getBean("blogDAO");
+		userdao1=(userdao)context.getBean("userDAO");
 	}
 	@Ignore
 	@Test
 	public void addblogTest()
 	{
+		System.out.println("user"+userdao1);
 		blog b=new blog();
-		
+		userdetail u=userdao1.getuserbyid(443);
+		System.out.println("))))))");
+		System.out.println("test case "+u.getUserName());
 		b.setBlogName("my java article");
 		b.setBlogContent("explaining oops concept");
 		b.setStatus("N");
 		b.setLikes(100);
-		b.setUserId(20);
+		b.setUser(u);
 		b.setCreateDate(new Date());
 		assertTrue("Problem in Inserting blog",blogdao1.addblog(b));
 	
@@ -53,10 +58,11 @@ static blogdao blogdao1;
 		b.setBlogContent("explaining angular concept");
 		b.setStatus("A");
 		b.setLikes(500);
-		b.setUserId(21);
+		//b.setUserId(21);
 		b.setCreateDate(new Date());
 		assertTrue("Problem in updating blog",blogdao1.updateblog(b));
 	}
+	@Ignore
 	@Test
 	public void getblogbyidTest()
 	{
@@ -71,17 +77,16 @@ static blogdao blogdao1;
 		blog b=blogdao1.getblogbyid(4);
 		assertTrue("problem in deleting blog",blogdao1.deleteblog(b));
 	}
-	@Ignore
 	@Test
 	public void getallblogTest()
 	{
-		List<blog> l=blogdao1.getallblogs();
+		List<blog> l=blogdao1.getallblogs1(490);
 		for(blog b:l)
 		{
-			System.out.println(b.getBlogId());
+			System.out.println(b.getBlogId()+"   "+b.getBlogName());
 		}
 	}
-	
+	@Ignore
 	@Test
 	public void approveblogTest()
 	{
@@ -90,7 +95,7 @@ static blogdao blogdao1;
 	b.setStatus("A");
 	assertTrue("problem in approving blog id",blogdao1.approveblog(b));
 	}
-	
+	@Ignore
 	@Test
 	public void rejectblogTest()
 	{

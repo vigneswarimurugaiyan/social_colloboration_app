@@ -117,8 +117,8 @@ public userdetail getuser(String userName)
 	 session.flush();
 	 session.close();
     System.out.println("entered after get in the impl");
-    System.out.println("grt user"+u);
-   
+    System.out.println("get user"+u);
+
 	return u;
 	 
 }
@@ -133,7 +133,7 @@ public boolean checklogin(userdetail user) {
 	if(u==null)
 		return false;
 	else
-		System.out.println("logged in successfully");
+		System.out.println(" inside the checklogin logged in successfully");
 		return true;
 	
 }

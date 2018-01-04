@@ -36,7 +36,7 @@ static blogcommentdao blogcommentdao1;
 		bc.setBlogId(1);
 		bc.setBlogCommentdate(new Date());
 		bc.setBlogComment("good");
-		bc.setUserId(20);
+	//	bc.setUserId(20);
 		bc.setUserName("maha");
 		assertTrue("Problem in Inserting blogcomment",blogcommentdao1.addblogcomment(bc));
 	
@@ -49,7 +49,7 @@ static blogcommentdao blogcommentdao1;
 		bc.setBlogId(3);
 		bc.setBlogCommentdate(new Date());
 		bc.setBlogComment("super");
-		bc.setUserId(19);
+		//bc.setUserId(19);
 		bc.setUserName("vicky");
 		assertTrue("Problem in updating blogcomment",blogcommentdao1.updateblogcomment(bc));
 	}
