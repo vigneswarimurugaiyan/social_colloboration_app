@@ -1,5 +1,6 @@
 package com.maven.socialappbackend.model;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -20,6 +21,15 @@ public class userdetail {
 	private String status;
 	private String isOnline;
 	private String role;
+	@OneToMany(mappedBy="user")
+	private List<blog> bl;
+	
+	public List<blog> getBl() {
+		return bl;
+	}
+	public void setBl(List<blog> bl) {
+		this.bl = bl;
+	}
 	public String getStatus() {
 		return status;
 	}

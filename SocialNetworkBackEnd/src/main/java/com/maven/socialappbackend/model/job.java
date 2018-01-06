@@ -11,25 +11,33 @@ public class job {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int jobId;
-	private String jobProfile;
+	private String jobName;
 	private String jobDesc;
 	private String jobQualification;
-	private String status;
 	private Date postDate;
+	private int salary;
 	public int getJobId() {
 		return jobId;
 	}
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public String getJobProfile() {
-		return jobProfile;
+	
+	public String getJobName() {
+		return jobName;
 	}
-	public void setJobProfile(String jobProfile) {
-		this.jobProfile = jobProfile;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
+	public double getSalary() {
+		return salary;
+	}
+	
 	public String getJobDesc() {
 		return jobDesc;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
@@ -40,12 +48,7 @@ public class job {
 	public void setJobQualification(String jobQualification) {
 		this.jobQualification = jobQualification;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 	public Date getPostDate() {
 		return postDate;
 	}

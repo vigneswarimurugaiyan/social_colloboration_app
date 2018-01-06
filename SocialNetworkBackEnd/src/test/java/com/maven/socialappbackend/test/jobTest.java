@@ -32,11 +32,11 @@ static jobdao jobdao1;
 	public void addjobTest()
 	{
 		job j=new job();
-		j.setJobProfile("vigneswari");
+		j.setJobName("vigneswari");
 		j.setJobDesc("good");
 		j.setJobQualification("B-Tech,IT");
-		j.setStatus("online");
 		j.setPostDate(new Date());
+		j.setSalary(10000);
 		assertTrue("Problem in Inserting job",jobdao1.addjob(j));
 	
 	}
@@ -45,11 +45,12 @@ static jobdao jobdao1;
 	public void updatejobTest()
 	{
 		job j=jobdao1.getjobbyid(36);
-		j.setJobProfile("maha");
-		j.setJobDesc("super");
+		j.setJobDesc("maha");
+		j.setJobName("super");
 		j.setJobQualification("Bsc-cse");
-		j.setStatus("online");
+		//j.setStatus("online");
 		j.setPostDate(new Date());
+		j.setSalary(10000);
 		assertTrue("Problem in updating job",jobdao1.updatejob(j));
 	}
 	@Ignore
