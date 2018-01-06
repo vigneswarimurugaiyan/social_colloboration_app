@@ -26,14 +26,14 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="#!"><i class="fa fa-home"></i>Home</a></li>
-        <li><div ng-show="currentuser.role=='user'"><a href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li>	
-        <li><div ng-show="currentuser.role=='user'"><a href="#!Forum"><i class="fa fa-home"></i>Forum</a></li>
-				 <li><div ng-show="currentuser.role=='user'"><a href="#!Job"><i class="fa fa-shield"></i>Job</a></li>
-         <li><div ng-show="currentuser.role=='admin'"><a href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li>
- <li><div ng-show="currentuser.role=='admin'"><a href="#/joboperation"><i class="fa fa-shield">AdminJob</a></div></li>
+		<li><a href="#!"><i class="fa fa-home"></i>Home</a></li></ul>
+		<ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'" href="#!Blog"><i class="fa fa-shield"></i>Blog</a></li></ul>	
+        <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'" href="#!Forum"><i class="fa fa-home"></i>Forum</a></li></ul>
+		 <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'" href="#!Job"><i class="fa fa-shield"></i>Job</a></li></ul>
+          <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'"  href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li></ul>
+        <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'" href="#!AdminJob"><i class="fa fa-shield">AdminJob</a></li></ul>
        
-      </ul>
+      
       <ul class="nav navbar-nav navbar-right">
         <li><form><input type="submit" value="logout" ng-click="logout()"/>Logout</form></li>
       </ul>

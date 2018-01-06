@@ -32,6 +32,9 @@ myapp.config(function($routeProvider)
 			.when("/Blog",{templateUrl:"../Blog/Blog.html"})
             .when("/Forum",{templateUrl:"../Forum/Forum.html"})						  
 			.when("/AdminBlog",{templateUrl:"../Blog/AdminBlog.html"})
+			.when("/AdminJob",{templateUrl:"../Job/AdminJob.html"})
+			.when("/Job",{templateUrl:"../Job/Job.html"})
+			
 		});
 myapp.controller('usercontroller', function($scope,$http) {
 	$scope.userdetail={userName:"",password:"",emailId:""};
@@ -167,6 +170,74 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			}
 
 		});
+
+
+myapp.controller("jobcontroller",function($scope,$http,$window)
+		{
+	
+	
+			$scope.job={jobId:"",jobName:"",jobDesc:"",jobQualification:"",postDate:"",salary:""};
+			var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+			$scope.currentuser=cuser;
+			$scope.addjob=function()
+			{
+				console.log('Entered into job');
+				$http.post('http://localhost:9089/middlewarerest/addjob',$scope.job)
+				.then(function(response)
+						{
+						console.log('Successful Blog Entered');
+						});
+			}
+			$http.get('http://localhost:9089/middlewarerest/getAllJobs')
+			.then(function(response)
+			{
+			$scope.jobdata=response.data;
+		
+			});
+			
+			$scope.selectjob=function(job)
+			{
+				console.log("retrived selected job",job);
+				$scope.clickjob=job;
+				}
+	
+			$scope.updatejob=function()
+			{
+				console.log('Entered into update job');
+				$http.post('http://localhost:9089/middlewarerest/editjob',$scope.clickjob)
+				.then(getalljobs(),function(response){
+
+						
+						console.log('Successful job updated');
+						});
+			}
+			$scope.deletejob=function()
+			{
+				console.log('Entered into delete job');
+				$http.post('http://localhost:9089/middlewarerest/deletejob',$scope.clickjob)
+				.then(getalljobs(),function(response){	
+						console.log('Successful job deleted');
+						});
+			}
+			function getalljobs()
+			{
+				
+				$http.get('http://localhost:9089/middlewarerest/getAllJobs')
+				.then(function(response)
+				{
+				$scope.jobdata=response.data;
+			
+				});
+			}
+	
+		});
+			
+
+
+
+
+
+
 /*myapp.run(function($rootScope,$cookies)
 		{
 	console.log("i am in function");
