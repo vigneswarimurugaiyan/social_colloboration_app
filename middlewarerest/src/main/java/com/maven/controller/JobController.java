@@ -1,6 +1,7 @@
 package com.maven.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maven.socialappbackend.dao.jobdao;
 import com.maven.socialappbackend.model.blog;
 import com.maven.socialappbackend.model.job;
+import com.maven.socialappbackend.model.userdetail;
 @RestController
 public class JobController {
 
@@ -21,9 +23,12 @@ public class JobController {
    jobdao jobDAO;
    
 	@PostMapping(value="/addjob")
-    public ResponseEntity<job> saveblog(@RequestBody job b)
+    public ResponseEntity<job> saveblog(@RequestBody job b,userdetail u)
     {
-      if(jobDAO.addjob(b))
+    	List<userdetail> l=new ArrayList<userdetail>();
+        l.add(u);
+        b.setUd(l);
+        if(jobDAO.addjob(b))
       {
 	    System.out.println(b);
         return new ResponseEntity<job>(b,HttpStatus.OK);

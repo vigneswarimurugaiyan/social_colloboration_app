@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.maven.socialappbackend.dao.userdao;
+import com.maven.socialappbackend.model.job;
 import com.maven.socialappbackend.model.userdetail;
 @RestController
 public class usercontroller {
@@ -18,7 +19,7 @@ userdao userDAO;
 @PostMapping(value="/insertuser")
 public ResponseEntity<userdetail> saveuser(@RequestBody userdetail b)
 {
-	b.setRole("user");
+	b.setRole("admin");
 	b.setIsOnline("N");
 	b.setStatus("N");
 if(userDAO.adduser(b))
