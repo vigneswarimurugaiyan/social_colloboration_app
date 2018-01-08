@@ -11,7 +11,7 @@ $scope.currentuser=ddd;
 $scope.logout=function(){
 
 	console.log("inside logout"+$scope.currentuser.userName);
-			$http.get('http://localhost:9089/middlewarerest/logoutuser/'+$scope.currentuser.userName).then(function(response)
+			$http.get('http://localhost:9099/middlewarerest/logoutuser/'+$scope.currentuser.userName).then(function(response)
 					{
 				    var key = "userdetail";
 					console.log('Successfully loggedout');
@@ -34,13 +34,13 @@ myapp.config(function($routeProvider)
 			.when("/AdminBlog",{templateUrl:"../Blog/AdminBlog.html"})
 			.when("/AdminJob",{templateUrl:"../Job/AdminJob.html"})
 			.when("/Job",{templateUrl:"../Job/Job.html"})
-			
+			.when("/showjob",{templateUrl:"../Job/showjob.html"})
 		});
 myapp.controller('usercontroller', function($scope,$http) {
 	$scope.userdetail={userName:"",password:"",emailId:""};
 	$scope.insertuser= function(){
 			console.log('entered into registration');
-			$http.post('http://localhost:9089/middlewarerest/insertuser',$scope.userdetail)
+			$http.post('http://localhost:9099/middlewarerest/insertuser',$scope.userdetail)
 			.then(function(response)
 					{
 					console.log('Successfully registered');
@@ -55,7 +55,7 @@ myapp.controller('logincontroller',function($scope,$http,$window,$rootScope)
 	$scope.login=function()
 	{
 		console.log("enterd into login process");
-		$http.post('http://localhost:9089/middlewarerest/loginuser',$scope.userdetail)
+		$http.post('http://localhost:9099/middlewarerest/loginuser',$scope.userdetail)
 		.then(function(response)
 				{
 			    
@@ -93,14 +93,14 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			{
 				$scope.blog.user=cuser;
 				console.log('Entered into InsertBlog');
-				$http.post('http://localhost:9089/middlewarerest/addblog',$scope.blog)
+				$http.post('http://localhost:9099/middlewarerest/addblog',$scope.blog)
 				.then(function(response)
 						{
 						console.log('Successful Blog Entered');
 						});
 			}
 			
-			$http.get('http://localhost:9089/middlewarerest/getAllBlogs/'+cuser.userId)
+			$http.get('http://localhost:9099/middlewarerest/getAllBlogs/'+cuser.userId)
 			.then(function(response)
 			{
 			$scope.blogdata=response.data;
@@ -108,7 +108,7 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			});
 			$scope.like=function(blogId)
 			{
-				$http.get('http://localhost:9089/middlewarerest/increaselike/'+blogId).then(getallblogs(),function(response){
+				$http.get('http://localhost:9099/middlewarerest/increaselike/'+blogId).then(getallblogs(),function(response){
 				console.log('blog like incremented');
 				
 				});
@@ -123,7 +123,7 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			$scope.updateblog=function()
 			{
 				console.log('Entered into update blog');
-				$http.post('http://localhost:9089/middlewarerest/edit',$scope.clickblog)
+				$http.post('http://localhost:9099/middlewarerest/edit',$scope.clickblog)
 				.then(getallblogs(),function(response){
 
 						
@@ -133,7 +133,7 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			$scope.deleteblog=function()
 			{
 				console.log('Entered into delete blog');
-				$http.post('http://localhost:9089/middlewarerest/delete',$scope.clickblog)
+				$http.post('http://localhost:9099/middlewarerest/delete',$scope.clickblog)
 				.then(getallblogs(),function(response){
 
 						
@@ -143,7 +143,7 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			function getallblogs()
 			{
 				
-				$http.get('http://localhost:9089/middlewarerest/getAllBlogs/'+cuser.userId)
+				$http.get('http://localhost:9099/middlewarerest/getAllBlogs/'+cuser.userId)
 				.then(function(response)
 				{
 				$scope.blogdata=response.data;
@@ -156,14 +156,14 @@ myapp.controller("blogcontroller",function($scope,$http,$window)
 			}
 			$scope.acceptblog=function(blogId)
 			{
-				$http.get('http://localhost:9089/middlewarerest/acceptblog/'+blogId).then(getallblogs(),function(response){
+				$http.get('http://localhost:9099/middlewarerest/acceptblog/'+blogId).then(getallblogs(),function(response){
 					console.log('blog accepted');
 					
 					});
 			}
 			$scope.rejectblog=function(blogId)
 			{
-				$http.get('http://localhost:9089/middlewarerest/rejectblog/'+blogId).then(getallblogs(),function(response){
+				$http.get('http://localhost:9099/middlewarerest/rejectblog/'+blogId).then(getallblogs(),function(response){
 					console.log('blog rejected');
 					
 					});
@@ -182,13 +182,13 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			$scope.addjob=function()
 			{
 				console.log('Entered into job');
-				$http.post('http://localhost:9089/middlewarerest/addjob',$scope.job)
+				$http.post('http://localhost:9099/middlewarerest/addjob',$scope.job)
 				.then(function(response)
 						{
 						console.log('Successful Blog Entered');
 						});
 			}
-			$http.get('http://localhost:9089/middlewarerest/getAllJobs')
+			$http.get('http://localhost:9099/middlewarerest/getAllJobs')
 			.then(function(response)
 			{
 			$scope.jobdata=response.data;
@@ -204,7 +204,7 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			$scope.updatejob=function()
 			{
 				console.log('Entered into update job');
-				$http.post('http://localhost:9089/middlewarerest/editjob',$scope.clickjob)
+				$http.post('http://localhost:9099/middlewarerest/editjob',$scope.clickjob)
 				.then(getalljobs(),function(response){
 
 						
@@ -214,7 +214,7 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			$scope.deletejob=function()
 			{
 				console.log('Entered into delete job');
-				$http.post('http://localhost:9089/middlewarerest/deletejob',$scope.clickjob)
+				$http.post('http://localhost:9099/middlewarerest/deletejob',$scope.clickjob)
 				.then(getalljobs(),function(response){	
 						console.log('Successful job deleted');
 						});
@@ -222,13 +222,33 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			function getalljobs()
 			{
 				
-				$http.get('http://localhost:9089/middlewarerest/getAllJobs')
+				$http.get('http://localhost:9099/middlewarerest/getAllJobs')
 				.then(function(response)
 				{
 				$scope.jobdata=response.data;
 			
 				});
 			}
+			
+			
+			$scope.applyjob=function(jobId)
+			{
+				var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+				$scope.currentuser=cuser;
+			
+				$http.get('http://localhost:9099/middlewarerest/applyjob/'+jobId+"/"+$scope.currentuser.userId).then(getalljobs(),function(response){
+					console.log('job applied');
+					$scope.apply="a";
+					
+					});
+			}
+			//$scope.deletejob=function()
+			//{
+				//$http.get('http://localhost:9099/middlewarerest/rejectblog/'+blogId).then(getallblogs(),function(response){
+					//console.log('blog rejected');
+					
+				//	});
+			//}
 	
 		});
 			

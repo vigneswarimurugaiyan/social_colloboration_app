@@ -22,11 +22,11 @@
          <td>{{job.jobQualification}}</td>
          <td>{{job.salary}}</td>
          
-         <td ng-show="blog.status=='NA'">
+         <td ng-hide="apply=='a'">
         <button type="button" class="btn btn-info" ng-click="applyjob(job.jobId)">Apply</button>
      </td>
      <td ng-show="blog.status=='A'">
-        <button type="button" class="btn btn-danger" ng-click="rejectjob(job.jobId)">Reject</button>
+        <button type="button" class="btn btn-danger" ng-click="deletejob(job.jobId)">Reject</button>
      </td>
       </tr>
       
