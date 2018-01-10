@@ -1,33 +1,180 @@
-<center>Forum Page</center>
-
-<div ng-controller="ForumController">
-
-<form id="forumform" method="post">
-<table align="center" width="80%" border="1">
-	<tr>
-		<td>Froum Name</td>
-		<td><input type="text" name="forumName" ng-model="Forum.forumName"/></td>
-	</tr>
-	<tr>
-		<td>Froum Content</td>
-		<td><input type="text" name="forumcontent" ng-model="Forum.forumContent"/></td>
-	</tr>
-	<tr>
-		<td colspan="2"><center><input type="submit" value="Add Forum" ng-click="addForum()"/></center></td>
-	</tr>
-</table>
+<div class="container" ng-controller="forumcontroller"> 
+    {{forum}}
+    <hr>
+    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Add</button>
+     <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Forum</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Forum Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="forum.forumName">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Forum Content</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="forum.forumContent">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="addforum()" data-dismiss="modal">Add</button>
+    </div>
+  </div>
 </form>
-
-<table width="100%">
-	<tr bgcolor="green"> 
-		<td> Forum Name </td>
-		<td> Forum Content </td>
-	</tr>
-	<tr bgcolor="cyan" ng-repeat="forum in Forumdata">
-		<td><a href="ForumPage">{{Forum.forumName}}</a></td>
-		<td>{{Forum.forumContent}}</td>	
-	</tr>
-</table>
-
-
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+       </div>
+    </div>
+  
+  
+    <h2>Forum</h2>
+    <span class="clearfix"></span>
+    <hr>
+      <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>ForumName</th>
+        <th>ForumContent</th>
+        <th>Comments</th>
+        <th></th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="forum in forumdata">
+        <td>{{$index+1}}</td>
+        <td>{{forum.forumName}}</td>
+         <td>{{forum.forumContent}}</td>
+         <td>{{forum.forumComment}}</td>
+           <td>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalcomment" ng-click="selectforum(forum)">Comment</button>
+     </td>
+        <td ng-show="currentuser.userName==forum.user.userName">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModaledit" ng-click="selectforum(forum)">Edit</button>
+     </td>
+     <td  ng-show="currentuser.userName==forum.user.userName">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModaldelete" ng-click="selectforum(forum)">Delete</button>
+     </td>
+      </tr>
+      
+    </tbody>
+  </table>  
+    
+   
+  <div class="modal fade" id="myModaledit" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit forum</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="control-label col-sm-2">forum Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="clickforum.forumName">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">forum Content</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="clickforum.forumContent">
+    </div>
+  </div>
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="updateforum()" data-dismiss="modal">save</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+       </div>
+    </div>
+    
+    
+    
+    <div class="modal fade" id="myModalcomment" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Comment Forum</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal" role="form">
+ 
+  <div class="form-group">
+    <label class="control-label col-sm-2">forum comment</label>
+    <div class="col-sm-10">
+      <textarea rows="4" cols="50" ng-model="clickforum.forumComment"></textarea>
+    </div>
+  </div>
+  
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="updateforum()" data-dismiss="modal">save</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+       </div>
+    </div>
+    
+  
+    
+    
+    
+    
+  
+  <div class="modal fade" id="myModaldelete" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+        <strong style="color:red;">
+        you are going to delete <h4 style="color:black">forum NAME-{{clickforum.forumName}}</h4></strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteforum()">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+       </div>
+    </div>
+</div>
 </div>

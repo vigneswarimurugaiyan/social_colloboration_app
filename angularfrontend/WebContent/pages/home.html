@@ -32,6 +32,8 @@
 		 <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'" href="#!Job"><i class="fa fa-shield"></i>Job</a></li></ul>
 		 <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'" href="#!showfriend"><i class="fa fa-shield"></i>Showfriend</a></li></ul>
           <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'"  href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li></ul>
+           <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'"  href="#!AdminForum"><i class="fa fa-shield"></i>AdminForum</a></li></ul>
+           <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'"  href="#!userlist"><i class="fa fa-shield"></i>UserList</a></li></ul>
         <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'" href="#!AdminJob"><i class="fa fa-shield">AdminJob</a></li></ul>
        
       
@@ -45,7 +47,6 @@
 	</div>
 	</nav>
 
-<div>zzzzzzzz{{currentuser}}</div>  
     <!-- angular templating -->
 		<!-- this is where content will be injected -->
     <div ng-view></div>

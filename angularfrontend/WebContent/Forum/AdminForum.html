@@ -1,0 +1,30 @@
+<div class="container" ng-controller="forumcontroller"> 
+    <hr>
+    <button type="button" class="btn btn-info" ng-click="getallforums()">Admin forum</button>
+    <span class="clearfix"></span>
+    <hr>
+      <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>forumName</th>
+        <th>forumContent</th>
+        <th colspan="2">operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="forum in forumdata">
+        <td>{{$index+1}}</td>
+        <td>{{forum.forumName}}</td>
+         <td>{{forum.forumContent}}</td>
+         <td ng-show="forum.status=='NA'">
+        <button type="button" class="btn btn-info" ng-click="acceptforum(forum.forumId)">Approve</button>
+     </td>
+     <td ng-show="forum.status=='A'">
+        <button type="button" class="btn btn-danger" ng-click="rejectforum(forum.forumId)">Reject</button>
+     </td>
+      </tr>
+      
+    </tbody>
+  </table>  
+    </div>

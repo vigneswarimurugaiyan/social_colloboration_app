@@ -36,6 +36,7 @@
       <input type="password" placeholder="Password" name="password" ng-model="userdetail.password" required="required"/>
       <input type="text" ng-model="email" placeholder="Email Address" name="email" ng-model="userdetail.emailId" required="required"/>
       <button class="dsinz-login" ng-click="insertuser()" >create</button>
+      <h3 ng-show="register.status=='N'"><b style="color:red;">Successfully Registered</b></h3>
       <p class="message">Already registered?<a href="#" style="padding-left:4px">Sign In</a></p>
     </form>
     </div>

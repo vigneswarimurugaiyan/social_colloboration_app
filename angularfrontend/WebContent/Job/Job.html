@@ -31,5 +31,35 @@
       </tr>
       
     </tbody>
-  </table>  
+  </table> 
+  
+ <button type="button" class="btn btn-info" ng-click="appliedjob()">Applied Jobs List</button>
+    <span class="clearfix"></span>
+    <hr>
+      <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Job Name</th>
+        <th>Job Description</th>
+        <th>Job Qualification</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="job in jobdata1">
+        <td>{{$index+1}}</td>
+        <td>{{job.jobName}}</td>
+         <td>{{job.jobDesc}}</td>
+         <td>{{job.jobQualification}}</td>
+         <td>{{job.salary}}</td>
+         
+        
+      </tr>
+      
+    </tbody>
+  </table> 
+  
+  
+   
     </div>

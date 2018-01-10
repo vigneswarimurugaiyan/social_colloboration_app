@@ -33,8 +33,11 @@ myapp.config(function($routeProvider)
             .when("/Forum",{templateUrl:"../Forum/Forum.html"})						  
 			.when("/AdminBlog",{templateUrl:"../Blog/AdminBlog.html"})
 			.when("/AdminJob",{templateUrl:"../Job/AdminJob.html"})
+			 .when("/AdminForum",{templateUrl:"../Forum/AdminForum.html"})	
 			.when("/Job",{templateUrl:"../Job/Job.html"})
-			.when("/showjob",{templateUrl:"../Job/showjob.html"})
+			.when("/showfriend",{templateUrl:"../Friend/showfriend.html"})
+			.when("/userlist",{templateUrl:"../Friend/userlist.html"})
+			
 		});
 myapp.controller('usercontroller', function($scope,$http) {
 	$scope.userdetail={userName:"",password:"",emailId:""};
@@ -43,6 +46,8 @@ myapp.controller('usercontroller', function($scope,$http) {
 			$http.post('http://localhost:9099/middlewarerest/insertuser',$scope.userdetail)
 			.then(function(response)
 					{
+				$scope.register=response.data;
+				console.log("status",$scope.register.status);
 					console.log('Successfully registered');
 					});
 		}
@@ -65,15 +70,6 @@ myapp.controller('logincontroller',function($scope,$http,$window,$rootScope)
 			    var currentuser = JSON.parse($window.localStorage.getItem("userdetail"));
 			    console.log("ffffffffff",currentuser.role);
 			    console.log("ffffffffffff",currentuser.status);
-
-			    
-			    
-			    
-			    //$cookieStore.put("userdetail",$scope.userdetail);
-			    //$cookies.remove('userdetail');
-			    //onsole.log("value",$cookieStore.get('userdetail'));
-			    //$rootScope.currentuser=$cookieStore.get('userdetail');
-			    //console.log("inside login"+$rootScope.currentuser.userName);
 				console.log('Successfully loggedin');
 				$window.location.href='/angularfrontend/pages/home.html';
 				});
@@ -229,6 +225,28 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			
 				});
 			}
+			//function getalljobsapply()
+			//{
+				//var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+				//$scope.currentuser=cuser;
+				//$http.get('http://localhost:9099/middlewarerest/getAllJobsapply/'+$scope.currentuser.userId)
+				//.then(function(response)
+				//{
+				//$scope.jobdata1=response.data;
+			
+				//});
+			//}
+			$scope.appliedjob=function()
+			{
+				var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+				$scope.currentuser=cuser;
+				$http.get('http://localhost:9099/middlewarerest/getAllJobsapply/'+$scope.currentuser.userId)
+				.then(function(response)
+				{
+				$scope.jobdata1=response.data;
+			
+				});
+			}
 			
 			
 			$scope.applyjob=function(jobId)
@@ -238,7 +256,7 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 			
 				$http.get('http://localhost:9099/middlewarerest/applyjob/'+jobId+"/"+$scope.currentuser.userId).then(getalljobs(),function(response){
 					console.log('job applied');
-					$scope.apply="a";
+			
 					
 					});
 			}
@@ -252,6 +270,171 @@ myapp.controller("jobcontroller",function($scope,$http,$window)
 	
 		});
 			
+myapp.controller('friendcontroller',function($scope,$http,$window)
+		{
+$scope.friend={friendId:"",friendName:"",userName:"",status:""};
+	var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+	$scope.currentuser=cuser;
+	
+		$http.get('http://localhost:9099/middlewarerest/getAllusers/'+$scope.currentuser.userId)
+		.then(function(response)
+		{
+		$scope.userdata=response.data;
+	
+		});
+		
+		$http.get('http://localhost:9099/middlewarerest/getallfriends/'+$scope.currentuser.userName)
+		.then(function(response)
+		{
+		$scope.frienddata=response.data;
+	
+		});
+		
+		function getallfriends()
+		{
+			$http.get('http://localhost:9099/middlewarerest/getallfriends/'+$scope.currentuser.userName)
+			.then(function(response)
+			{
+			$scope.frienddata=response.data;
+		
+			});	
+		}
+		
+		
+		$scope.request=function(user)
+		{
+			$scope.clickuser=user;
+		}
+		
+		$scope.addfriend=function()
+		
+		{
+			var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+			$scope.currentuser=cuser;
+			$scope.friend.friendName=$scope.clickuser.userName;
+			$scope.friend.userName=$scope.currentuser.userName;
+			console.log("entered into request friend")
+			$http.post('http://localhost:9099/middlewarerest/addfriend',$scope.friend)
+		}
+		
+		
+		$scope.acceptrequest=function(friendId)
+		{
+			$http.get('http://localhost:9099/middlewarerest/getapprove/'+friendId).then(getallfriends(),function(response){
+				console.log('friend accepted');
+				
+				});
+		}
+		
+		$scope.deleterequest=function(friendId)
+		{
+			$http.get('http://localhost:9099/middlewarerest/deletefriend/'+friendId).then(getallfriends(),function(response){
+				console.log('friend deleted');
+				
+				});
+		}
+		
+		
+		$scope.friends=function()
+		{
+			$http.get('http://localhost:9099/middlewarerest/getapprovefriends/'+$scope.currentuser.userName)
+			.then(function(response)
+			{
+			$scope.frienddata1=response.data;
+		
+			});	
+		}
+		
+	});
+
+
+myapp.controller("forumcontroller",function($scope,$http,$window)
+		{
+	
+	        
+			$scope.forum={forumId:"",forumName:"",ForumContent:"",createDate:"",ForumComment:"",user:"",status:"NA"};
+			var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+			$scope.currentuser=cuser;
+			$scope.addforum=function()
+			{
+				$scope.forum.user=cuser;
+				console.log('Entered into forum');
+				$http.post('http://localhost:9099/middlewarerest/addforum',$scope.forum)
+				.then(function(response)
+						{
+						console.log('Successful forum Entered');
+						});
+			}
+			
+			$http.get('http://localhost:9099/middlewarerest/getAllforums/'+cuser.userId)
+			.then(function(response)
+			{
+			$scope.forumdata=response.data;
+		
+			});
+			//$scope.like=function(blogId)
+			//{
+				//$http.get('http://localhost:9099/middlewarerest/increaselike/'+blogId).then(getallblogs(),function(response){
+				//console.log('blog like incremented');
+				
+			//	});
+	
+			//}
+			$scope.selectforum=function(forum)
+			{
+				console.log("retrived selected forum",forum);
+				$scope.clickforum=forum;
+				}
+			$scope.updateforum=function()
+			{
+				console.log('Entered into update forum');
+				$http.post('http://localhost:9099/middlewarerest/editforum',$scope.clickforum)
+				.then(getallforums(),function(response){
+
+						
+						console.log('Successful forum updated');
+						});
+			}
+			$scope.deleteforum=function()
+			{
+				console.log('Entered into delete forum');
+				$http.post('http://localhost:9099/middlewarerest/deleteforum',$scope.clickforum)
+				.then(getallforums(),function(response){
+
+						
+						console.log('Successful forum deleted');
+						});
+			}
+			function getallforums()
+			{
+				
+				$http.get('http://localhost:9099/middlewarerest/getAllforums/'+cuser.userId)
+				.then(function(response)
+				{
+				$scope.forumdata=response.data;
+			
+				});
+			}
+			
+			$scope.acceptforum=function(forumId)
+			{
+				$http.get('http://localhost:9099/middlewarerest/acceptforum/'+forumId).then(getallforums(),function(response){
+					console.log('forum accepted');
+					
+					});
+			}
+			$scope.rejectforum=function(forumId)
+			{
+				$http.get('http://localhost:9099/middlewarerest/rejectforum/'+forumId).then(getallforums(),function(response){
+					console.log('forum rejected');
+					
+					});
+			}
+
+
+		});
+
+
 
 
 
