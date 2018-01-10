@@ -46,6 +46,12 @@ public class ApplicationConfig {
 			Properties properties=new Properties();
 			properties.setProperty("hibernate.hbm2ddl.auto", "update");
 			properties.put("hibernate.dialect","org.hibernate.dialect.Oracle10gDialect");
+			properties.put("hibernate.show_sql","true");
+//
+//			hibernate.dialect=org.hibernate.dialect.H2Dialect
+//					hibernate.show_sql=true
+//					hibernate.hbm2ddl.auto=create
+
 			return properties;
 		}
 		

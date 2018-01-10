@@ -6,13 +6,17 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.maven.socialappbackend.dao.jobdao;
 import com.maven.socialappbackend.dao.userdao;
+import com.maven.socialappbackend.model.job;
 import com.maven.socialappbackend.model.userdetail;
 
 import org.junit.Test;
 
 public class userdetailTest {
 static userdao userdao1;
+static jobdao jobdao1;
 	
 	@BeforeClass
 	public static void initialize()
@@ -22,15 +26,17 @@ static userdao userdao1;
 		context.refresh();
 		
 		userdao1=(userdao)context.getBean("userDAO");
+		jobdao1=(jobdao)context.getBean("jobDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void adduserTest()
 	{
 		userdetail user=new userdetail();
-		
-		user.setUserName("unique");
-		user.setPassword("unique");
+		//job b=jobdao1.getjobbyid(532);
+		//System.out.println("job object"+b);
+		user.setUserName("uniquessss");
+		user.setPassword("uniquessss");
 		user.setEmailId("a@gmail.com");
 		user.setRole("user");
 		user.setIsOnline("N");
@@ -85,6 +91,7 @@ static userdao userdao1;
 		assertTrue("problem in changing the  user online status",userdao1.changeonlinestatus(u));
 		
 	}
+	
 	@Test
 	public void getuserTest()
 	{

@@ -3,10 +3,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
@@ -21,14 +24,14 @@ public class userdetail {
 	private String status;
 	private String isOnline;
 	private String role;
-	@OneToMany(mappedBy="user")
-	private List<blog> bl;
+	@OneToMany(fetch=FetchType.EAGER)
+	private List<job> j;
 	
-	public List<blog> getBl() {
-		return bl;
+	public List<job> getJ() {
+		return j;
 	}
-	public void setBl(List<blog> bl) {
-		this.bl = bl;
+	public void setJ(List<job> j) {
+		this.j = j;
 	}
 	public String getStatus() {
 		return status;

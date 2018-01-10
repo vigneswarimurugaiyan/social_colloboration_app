@@ -2,10 +2,13 @@ package com.maven.socialappbackend.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +19,25 @@ public class forum {
 private int forumId;
 private String forumName;
 private String forumContent;
-private int userId;
+@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+@JoinColumn(name="userId")
+private userdetail user;
 private Date createDate;
 private String status;
+private String forumComment;
+
+public userdetail getUser() {
+	return user;
+}
+public void setUser(userdetail user) {
+	this.user = user;
+}
+public String getForumComment() {
+	return forumComment;
+}
+public void setForumComment(String forumComment) {
+	this.forumComment = forumComment;
+}
 public int getForumId() {
 	return forumId;
 }
@@ -37,12 +56,7 @@ public String getForumContent() {
 public void setForumContent(String forumContent) {
 	this.forumContent = forumContent;
 }
-public int getUserId() {
-	return userId;
-}
-public void setUserId(int userId) {
-	this.userId = userId;
-}
+
 public Date getCreateDate() {
 	return createDate;
 }

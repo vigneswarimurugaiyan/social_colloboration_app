@@ -22,25 +22,27 @@ static frienddao frienddao1;
 		
 		frienddao1=(frienddao)context.getBean("friendDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void addfriendTest()
 	{
 		friend f=new friend();
-		f.setStatus("online");
-		f.setUserId(20);
+		f.setStatus("R");
+		f.setUserName("unique");
+		f.setFriendName("giri");
 		assertTrue("Problem in Inserting friend",frienddao1.addfriend(f));
 	
 	}
-	
+	@Ignore
 	@Test
 	public void updatefriendTest()
 	{
 		friend f=frienddao1.getfriendbyid(37);
 		f.setStatus("offline");
-		f.setUserId(21);
+		//f.setUserId(21);
 		assertTrue("Problem in updating friend",frienddao1.updatefriend(f));
 	}
+	@Ignore
 	@Test
 	public void getfriendbyidTest()
 	{

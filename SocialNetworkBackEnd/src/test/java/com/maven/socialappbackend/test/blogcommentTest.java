@@ -28,7 +28,7 @@ static blogcommentdao blogcommentdao1;
 		
 		blogcommentdao1=(blogcommentdao)context.getBean("blogcommentDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void addblogcommentTest()
 	{

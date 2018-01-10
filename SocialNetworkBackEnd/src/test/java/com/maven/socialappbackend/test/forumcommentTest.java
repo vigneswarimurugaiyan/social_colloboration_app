@@ -22,7 +22,7 @@ static forumcommentdao forumcommentdao1;
 		
 		forumcommentdao1=(forumcommentdao)context.getBean("forumcommentDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void addforumcommentTest()
 	{
@@ -34,7 +34,7 @@ static forumcommentdao forumcommentdao1;
 		assertTrue("Problem in Inserting forumcomment",forumcommentdao1.addforumcomment(fc));
 	
 	}
-	
+	@Ignore
 	@Test
 	public void updateforumTest()
 	{

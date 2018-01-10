@@ -12,19 +12,27 @@ public class friend {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int friendId;
-private int userId;
+private String userName;
+private String friendName;
 private String status;
+
+public String getFriendName() {
+	return friendName;
+}
+public void setFriendName(String friendName) {
+	this.friendName = friendName;
+}
 public int getFriendId() {
 	return friendId;
 }
 public void setFriendId(int friendId) {
 	this.friendId = friendId;
 }
-public int getUserId() {
-	return userId;
+public String getUserName() {
+	return userName;
 }
-public void setUserId(int userId) {
-	this.userId = userId;
+public void setUserName(String userName) {
+	this.userName = userName;
 }
 public String getStatus() {
 	return status;

@@ -2,6 +2,7 @@ package com.maven.socialappbackend.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class blog {
 private int blogId;
 private String blogName;
 private String blogContent;
-@ManyToOne
+@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 @JoinColumn(name="userId")
 private userdetail user;
 private Date createDate;

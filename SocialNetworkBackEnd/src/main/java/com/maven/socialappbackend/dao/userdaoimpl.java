@@ -56,7 +56,7 @@ try
 	{
 	 Session session=sessionFactory.openSession();
 	session.saveOrUpdate(user);
-	System.out.println("updated successfully");
+	System.out.println("updated user successfully");
 	session.flush();
 	session.close();
 	return true;
@@ -137,5 +137,43 @@ public boolean checklogin(userdetail user) {
 		return true;
 	
 }
+public boolean checkregister(userdetail user) {
+	System.out.println("inside the check register");
+	Session session=sessionFactory.openSession();
+	Query q=session.createQuery("from userdetail where userName=:uname");
+	q.setParameter("uname",user.getUserName());
+	if(q.list()==null)
+	{
+		System.out.println("inside the check if register");
+	
+		return true;
+	}
+	else
+	{
+		System.out.println("inside the  elsecheck register");
+	
+		return false;
+	}
+	
+}
+
+
+
+
+
+
+@Transactional
+public List<userdetail> getalluser1(userdetail user) {
+	Session session=sessionFactory.openSession();
+	String hql="from userdetail where role!=:admin and userName!=:user";
+	Query query=session.createQuery(hql);
+	query.setParameter("admin","admin");
+	query.setParameter("user",user.getUserName());
+	return query.list();
+}
+
+
+
+
 }
 

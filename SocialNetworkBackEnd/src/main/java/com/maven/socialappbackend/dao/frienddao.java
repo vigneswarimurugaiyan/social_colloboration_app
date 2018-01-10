@@ -9,5 +9,6 @@ public interface frienddao {
 	public boolean updatefriend(friend f);
 	public boolean deletefriend(friend f);
 	public friend getfriendbyid(int friendId);
-	public List<friend> getallfriends();
+	public List<friend> getallfriends(String userName);
+	public List<friend> getapprovedfriends(String userName);
 }

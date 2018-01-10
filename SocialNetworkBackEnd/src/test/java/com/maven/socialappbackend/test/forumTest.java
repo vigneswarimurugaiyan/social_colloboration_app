@@ -22,7 +22,7 @@ static forumdao forumdao1;
 		
 		forumdao1=(forumdao)context.getBean("forumDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void addforumTest()
 	{
@@ -36,6 +36,7 @@ static forumdao forumdao1;
 		assertTrue("Problem in Inserting forum",forumdao1.addforum(f));
 	
 	}
+	@Ignore
 	@Test
 	public void updateforumTest()
 	{
@@ -47,6 +48,7 @@ static forumdao forumdao1;
 		f.setCreateDate(new Date());
 		assertTrue("Problem in updating forum",forumdao1.updateforum(f));
 	}
+	@Ignore
 	@Test
 	public void getforumbyidTest()
 	{
@@ -61,6 +63,7 @@ static forumdao forumdao1;
 		forum f=forumdao1.getforumbyid(4);
 		assertTrue("problem in deleting forum",forumdao1.deleteforum(f));
 	}
+	@Ignore
 	@Test
 	public void getallforumTest()
 	{

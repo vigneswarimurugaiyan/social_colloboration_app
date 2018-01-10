@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.maven.socialappbackend.model.job;
+import com.maven.socialappbackend.model.userdetail;
 @Repository("jobdao")
 public class jobdaoimpl implements jobdao {
 	@Autowired
@@ -86,6 +87,13 @@ public List<job> getalljobs()
 	String hql="from job";
 	Query query=session.createQuery(hql);
 	return query.list();
+}
+
+public List<job> getalljobsapply(userdetail u) {
+	System.out.println("list of jobs inside the apply");
+	List l1=u.getJ();
+	System.out.println("list"+l1);
+	return l1;
 }
 
 }

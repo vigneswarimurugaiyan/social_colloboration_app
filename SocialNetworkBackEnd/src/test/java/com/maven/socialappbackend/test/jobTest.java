@@ -11,12 +11,15 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.maven.socialappbackend.dao.jobdao;
+import com.maven.socialappbackend.dao.userdao;
 import com.maven.socialappbackend.model.job;
+import com.maven.socialappbackend.model.userdetail;
 
 public class jobTest {
 
 	
 static jobdao jobdao1;
+static userdao userdao1;
 	
 	@BeforeClass
 	public static void initialize()
@@ -24,19 +27,20 @@ static jobdao jobdao1;
 		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
 		context.scan("com.maven.socialappbackend");
 		context.refresh();
-		
+		userdao1=(userdao)context.getBean("userDAO");
 		jobdao1=(jobdao)context.getBean("jobDAO");
 	}
-	
+	@Ignore
 	@Test
 	public void addjobTest()
 	{
 		job j=new job();
-		j.setJobName("vigneswari");
+		//userdetail u=userdao1.getuserbyid(519);
+		j.setJobName("vignesssssssssssssswari");
 		j.setJobDesc("good");
 		j.setJobQualification("B-Tech,IT");
 		j.setPostDate(new Date());
-		j.setSalary(10000);
+		j.setSalary(1000089);
 		assertTrue("Problem in Inserting job",jobdao1.addjob(j));
 	
 	}

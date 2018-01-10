@@ -9,9 +9,11 @@ public boolean adduser(userdetail user);
 public boolean updateuser(userdetail user);
 public boolean deleteuser(userdetail user);
 public List<userdetail> getalluser();
+public List<userdetail> getalluser1(userdetail user);
 public userdetail getuserbyid(int userId);
 public userdetail getuser(String userName);
 public boolean checklogin(userdetail user);
+public boolean checkregister(userdetail user);
 public boolean changeonlinestatus(userdetail user);
 
 }
