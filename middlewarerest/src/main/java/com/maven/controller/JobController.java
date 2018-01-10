@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maven.socialappbackend.dao.jobdao;
+import com.maven.socialappbackend.dao.userdao;
 import com.maven.socialappbackend.model.blog;
 import com.maven.socialappbackend.model.job;
 import com.maven.socialappbackend.model.userdetail;
@@ -21,13 +22,14 @@ public class JobController {
 
 	@Autowired
    jobdao jobDAO;
-   
+	@Autowired
+   userdao userDAO;
 	@PostMapping(value="/addjob")
-    public ResponseEntity<job> saveblog(@RequestBody job b,userdetail u)
+    public ResponseEntity<job> saveblog(@RequestBody job b)
     {
-    	List<userdetail> l=new ArrayList<userdetail>();
-        l.add(u);
-        b.setUd(l);
+    //	List<userdetail> l=new ArrayList<userdetail>();
+      //  l.add(u);
+       // b.setUd(l);
         if(jobDAO.addjob(b))
       {
 	    System.out.println(b);
@@ -49,6 +51,17 @@ public class JobController {
 	    	System.out.println("check list %%%%%%%%%%%%%%%%%%%"+listjobs);
 		return new ResponseEntity<ArrayList<job>>(listjobs,HttpStatus.OK);
 	}
+    
+    
+    @GetMapping(value="/getAllJobsapply/{userId}")
+   	public ResponseEntity<List<job>> getAllBlogsapply(@PathVariable("userId") int userId)
+   	{
+   		userdetail u=userDAO.getuserbyid(userId);
+   		List listjobs = jobDAO.getalljobsapply(u);
+   	    
+   	    	System.out.println("check list apply job "+listjobs);
+   		return new ResponseEntity<List<job>>(listjobs,HttpStatus.OK);
+   	}
     @PostMapping(value="/editjob")
 	public  ResponseEntity<job> updateBlog(@RequestBody job b)
 	{
@@ -78,5 +91,38 @@ public class JobController {
 		}
 	}
  
-    
+@GetMapping(value="/applyjob/{jobId}/{userId}")
+	public ResponseEntity<job> approvejob(@PathVariable("jobId") int jobId,@PathVariable("userId") int userId)
+	{
+	
+	job b=jobDAO.getjobbyid(jobId);
+	userdetail ud=userDAO.getuserbyid(userId);
+	//b.getUd().add(ud);
+	
+	ud.getJ().add(b);
+	
+	System.out.println("ssss"+ud.getJ());
+	for(job j:ud.getJ())
+	{
+		
+		System.out.println("jjjj"+j.getJobName());
+	}
+	
+	//userDAO.updateuser(ud);
+		if(userDAO.updateuser(ud))
+		 {
+			
+		   System.out.println(b);
+		    
+	        return new ResponseEntity<job>(b,HttpStatus.OK);
+	      }
+		 else
+	      {
+		   return new ResponseEntity<job>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
+	      }	 	
+	      
+	}
+	
+	    
+
 }
