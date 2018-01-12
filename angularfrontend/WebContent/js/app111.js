@@ -1,4 +1,67 @@
 var myapp=angular.module("myApp",['ngRoute','ngCookies']);
+myapp.factory('chatService', function($q , $timeout)
+{
+
+	var base_url="http://localhost:9099/middlewarerest";
+	
+	var service={},listener=$q.defer(),socket={client:null,stomp:null},messageIds=[];
+
+	service.RECONNECT_TIMEOUT=30000;
+	service.SOCKET_URL=base_url+"/chat";
+	service.CHAT_TOPIC="/topic/message";
+	service.CHAT_BROKER="/app/chat";
+
+	service.send=function(message)
+	{
+		var id=Math.floor(Math.random()*1000000);
+		socket.stomp.send(service.CHAT_BROKER,{priority:9},JSON.stringify({message:message,id:id}));
+		messageIds.push(id);
+	};
+
+	service.receive=function()
+	{
+		return listener.promise;
+	};
+
+	var reconnect=function()
+	{
+		$timeout(function()
+		{
+		initialize();
+		},this.RECONNECT_TIMEOUT);
+	};
+
+	var getMessage=function(data)
+	{
+		var message=JSON.parse(data),out={};
+		out.message=message.message;
+		out.time=new Date(message.time);
+		return out;
+	};
+
+	var startListener=function()
+	{
+		socket.stomp.subscribe(service.CHAT_TOPIC,function(data)
+		{
+		listener.notify(getMessage(data.body));
+		});
+	};
+
+	var initialize=function()
+	{
+		socket.client=new SockJS(service.SOCKET_URL);
+		socket.stomp=Stomp.over(socket.client);
+		socket.stomp.connect({},startListener);
+		socket.stomp.onclose=reconnect;
+	};
+
+	initialize();
+
+	return service;
+
+});
+
+
 myapp.controller('indexcontroller', function($scope,$rootScope,$cookieStore,$http,$window)
 		{
 	
@@ -37,6 +100,8 @@ myapp.config(function($routeProvider)
 			.when("/Job",{templateUrl:"../Job/Job.html"})
 			.when("/showfriend",{templateUrl:"../Friend/showfriend.html"})
 			.when("/userlist",{templateUrl:"../Friend/userlist.html"})
+			.when("/chat",{templateUrl:"../chat/Chat.html"})
+			
 			
 		});
 myapp.controller('usercontroller', function($scope,$http) {
@@ -435,9 +500,26 @@ myapp.controller("forumcontroller",function($scope,$http,$window)
 		});
 
 
+myapp.controller('chatcontroller', function($scope,chatService,$window)
+		{
+	var cuser= JSON.parse($window.localStorage.getItem('userdetail'));
+	$scope.currentuser=cuser;
+			$scope.messages=[];
+			$scope.message="";
+			$scope.max=140;
+			
+			$scope.addMessage=function()
+			{
+				chatService.send($scope.currentuser.userName+":" +$scope.message);
+				$scope.message="";
+			};
 
+			chatService.receive().then(null,null,function(message)
+			{
+				$scope.messages.push(message);
+			});	
 
-
+		});
 
 
 

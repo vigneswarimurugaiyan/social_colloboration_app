@@ -11,7 +11,12 @@
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.3/lodash.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
+	
  <script src="../js/app111.js"></script>
+ 
  </head>
 <body ng-app="myApp" ng-controller="indexcontroller">
 	<nav class="navbar navbar-inverse">
@@ -34,6 +39,7 @@
           <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'"  href="#!AdminBlog"><i class="fa fa-shield"></i>AdminBlog</a></li></ul>
            <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'"  href="#!AdminForum"><i class="fa fa-shield"></i>AdminForum</a></li></ul>
            <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'"  href="#!userlist"><i class="fa fa-shield"></i>UserList</a></li></ul>
+           <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='user'"  href="#!chat"><i class="fa fa-shield"></i>Chat</a></li></ul>
         <ul class="nav navbar-nav"><li><a ng-show="currentuser.role=='admin'" href="#!AdminJob"><i class="fa fa-shield">AdminJob</a></li></ul>
        
       
