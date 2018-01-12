@@ -116,7 +116,7 @@ public class Blogcontroller {
 		   return new ResponseEntity<blog>(b,HttpStatus.INTERNAL_SERVER_ERROR);	
 	      }
 	}
-	@PostMapping(value = "delete")
+	@PostMapping(value = "/delete")
 	public ResponseEntity<blog> deleteBlog(@RequestBody blog b)
 	{
 		if(blogDAO.deleteblog(b))
