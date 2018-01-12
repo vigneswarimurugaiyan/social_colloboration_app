@@ -14,7 +14,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.3/lodash.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
-	
+	<link rel="stylesheet" href="css/design.css">
  <script src="../js/app111.js"></script>
  
  </head>
@@ -44,7 +44,9 @@
        
       
       <ul class="nav navbar-nav navbar-right">
-        <li><form><input type="submit" value="logout" ng-click="logout()"/>Logout</form></li>
+        <li><form><input type="submit" value="logout" ng-click="logout()"/>Logout</form></li><br><br>
+         <li style="background-color:#ece4e4;">Welcome:{{currentuser.userName}}</li>
+       
       </ul>
     </div>
 							</ul>
