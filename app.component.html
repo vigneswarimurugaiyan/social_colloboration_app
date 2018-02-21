@@ -1,0 +1,88 @@
+  <h1>
+    Welcome to {{ title }}!
+    
+  </h1>
+  <h4 style="color:red;">{{title}}</h4><h3>{{myobject.name}}</h3>
+  <div *ngFor='let in of arr'>
+  <ol type='A'>
+  <li>{{in}}</li>
+  </ol>
+  </div>
+  <ul>
+  <li *ngFor='let a of arrlist'>{{a.id}}</li>
+  <li *ngFor='let b of arrlist'>{{b.name}}</li>
+  </ul>
+  <button [disabled]="buttonstatus == 'enabled' ">click me!!!!</button>
+  <button (dblclick)="myfirstevent($event)">click me</button>
+<br><br>
+<br>
+
+<h3>Dynamic Form </h3>
+<div *ngIf="!name; else forminfo">
+<form [formGroup] = "nform" autocomplete="on">
+<div class="form-container">
+      <div class="row columns">
+        
+        <label>Name
+          <input type="text" formControlName="name">
+        </label>
+        <!-- This goes underneath the Name label -->
+<div class="alert" *ngIf="!nform.controls['name'].valid && nform.controls['name'].touched">{{titleAlert}}</div>
+
+   <label>Description
+          <textarea  formControlName="description"></textarea>
+        </label>
+        <!-- This goes underneath the Description label -->
+<div class="alert" *ngIf="!nform.controls['description'].valid && nform.controls['description'].touched">You must specify a description that's between 30 and 500 characters.</div>
+
+     <div *ngFor="let item of env_values; let idx = index">
+
+ <div class="row"> 
+
+  <!-- <div class="col-md-3">
+        <span class="form-control padding_pty"> -->&nbsp;&nbsp;&nbsp;&nbsp;{{item}}<br>
+   
+    <label *ngIf="item == 'date'">
+        <input type="date" class="form-control padding_pty"  (input)="env_params[item]=$event.target.value" minlength="5" maxlength="50" required/>
+   </label>
+     <label *ngIf="item == 'email'">
+        <input type="email" class="form-control padding_pty"  (input)="env_params[item]=$event.target.value" minlength="5" maxlength="50" required />
+   </label>
+    <label *ngIf="item !=='email' && item !=='date' ">
+        <input type="text" class="form-control padding_pty"  (input)="env_params[item]=$event.target.value" minlength="5" maxlength="50" required />
+   </label>
+   
+   
+</div>
+</div>
+     
+
+        <label for="validate">Minimum of 3 Characters</label>
+        <input type="checkbox" name="validate" formControlName="validate" value="1"> On
+        
+        <input type="submit" class="button expanded" value="Submit Form" [disabled]="!nform.valid">
+      </div>
+    </div>
+</form>
+</div>
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+        <h1>{{ name }}</h1>
+
+        <p>{{ description }}</p>
+    </div>
+  </div>
+</ng-template>
+
+<div>
+        <select class="selectpicker" [(ngModel)]="env_values" id="select1" multiple data-style="btn-primary" (change)="envChange()" > 
+          <option>pincode</option>
+          <option>country</option>
+          <option>religion</option>
+        </select>    
+</div>
+    <app-myfirstcomponent></app-myfirstcomponent>
+  
+ 
