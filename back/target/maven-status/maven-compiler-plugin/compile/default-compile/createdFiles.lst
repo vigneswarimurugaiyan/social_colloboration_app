@@ -1,0 +1,6 @@
+com\product\model\User.class
+com\product\controller\UserController.class
+com\product\DAO\UserDAOImpl.class
+com\product\model\error.class
+com\product\config\ApplicationContextConfig.class
+com\product\DAO\UserDAO.class
