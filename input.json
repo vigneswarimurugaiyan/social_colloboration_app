@@ -1,0 +1,10 @@
+[
+{"label":"FirstNameoooooo","inputfield":"text"},
+{"label":"LastName","inputfield":"text"},
+{"label":"Email","inputfield":"email"},
+{"label":"DOB","inputfield":"date"},
+{"label":"submit","inputfield":"button"},
+{"label":"clear","inputfield":"button"}
+]
+
+
