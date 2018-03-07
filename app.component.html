@@ -1,1 +1,44 @@
-<app-dynamic-form>[dataObject]="arrdata"</app-dynamic-form>
+   <form *ngIf="myform" novalidate (ngSubmit)="onSubmit(myform)" [formGroup]="myform">
+    
+      <div *ngFor="let prop of objectProps">
+
+        <label>{{prop.label}}</label>
+
+        <div [ngSwitch]="prop.type">
+       <div *ngSwitchCase="'text'">   
+       <input [formControlName]="prop.key1"
+            [id]="prop.key1" [type]="prop.type">  
+       </div> 
+        <div *ngSwitchCase="'email'">   
+       <input [formControlName]="prop.key1"
+            [id]="prop.key1" [type]="prop.type">  
+       </div> 
+       
+        <div *ngSwitchCase="'date'">   
+       <input [formControlName]="prop.key1"
+            [id]="prop.key1" [type]="prop.type">  
+       </div> 
+       
+       
+       <div *ngSwitchCase="'select'">
+  <select [formControlName]="prop.key1">
+    <option *ngFor="let option of prop.options" [value]="option.value">
+      
+    </option>
+  </select>
+</div>
+      </div>
+      </div>
+      <p>
+        <button type="submit">Save</button>
+      </p>
+      </form> 
+       <hr />
+    <strong>Form Value</strong>
+    <pre>{{ myform.value | json }}</pre>
+    <strong>Form is valid:</strong> {{myform.valid}}    
+    
+   
+   
+    
+  
